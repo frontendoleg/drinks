@@ -34,13 +34,25 @@
 
     </div>
     <div class = "buttons">
-    <input type = "button" value = "ввод информации о напитке" class = 'btn'>
-    <input type = "button" value = "получение информации о напитке" class = 'btn'>
-    <input type = "button" value = "удаление информации о напитке" class = 'btn'>
-    <input type = "button" value = "перечень всех напитков" class = 'btn'>
+    <input type = "button" value = "ввод информации о напитке" class = 'btn' onClick="inputDrink()">
+    <input type = "button" value = "получение информации о напитке" class = 'btn' onclick="getDrink()">
+    <input type = "button" value = "удаление информации о напитке" class = 'btn' onclick="deleteDrink()">
+    <input type = "button" value = "перечень всех напитков" class = 'btn' onclick="listDrink()">
     </div>
     </div>
     <script>
+      function inputDrink(){
+      	alert('input');
+      }
+      function getDrink(){
+      	alert('get');
+      }
+      function deleteDrink(){
+      	alert('delete');
+      }
+      function listDrink(){
+      	alert('list');
+      }
     </script>
   </body>
 </html>
