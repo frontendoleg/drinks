@@ -10,7 +10,7 @@ function THashStorage(){
   return this.Name[Key];
   }
   this.DeleteValue = function(Key){
-  this.Name[Key] = null;
+  delete this.Name[Key];
   }
   this.GetKeys = function(){
   this.KeysA = [];
