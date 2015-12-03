@@ -27,6 +27,9 @@
     .buttons{
     	text-align: center;
     }
+    p{
+    	text-align: center;
+    }
   </style>
   </head>
   <body>
@@ -46,21 +49,36 @@
     <script src = 'HashStorage.js'></script>
     <script>
       var DrinkStorage = new THashStorage(); // создаем объект DrinkStorage класса HashStorage
+      function promptValid(msg1,msg2){
+      	var msg, Name;
+      	msg = msg1; // первое приглашение
+      	do{
+      		Name = prompt(msg);
+      		msg = msg2;// второе приглашение
+      	}
+      	while(!Name);
+      	return Name.toLowerCase();
+      }
       function inputDrink(){
-      	var Name = prompt ("Введите название напитка");// без валидации пока
+      	var Name = promptValid("Введите название напитка","Введите корректное название напитка");
       	var Alchohol = confirm ("Напиток алкогольный?");
-      	var Recept = prompt ("Введите рецепт приготовления напитка");// без валидации пока
+      	var Recept = promptValid ("Введите рецепт приготовления напитка","Корректно введите рецепт приготовления напитка");
       	DrinkStorage.AddValue(Name,{alc: Alchohol, txt: Recept}); // добавляем напиток в хранилище
       }
       function getDrink(){
-      	var Name = prompt ("Введите название напитка");// без валидации пока
-      	var getName = DrinkStorage.GetValue(Name); // формат Object {alc:true, txt: смешать, смешать.}
+      	var Name = promptValid ("Введите название напитка","Введите корректное название напитка");
       	var EL = document.getElementById('place');
+      	if(Name in DrinkStorage.Name){
+      	var getName = DrinkStorage.GetValue(Name); // формат Object {alc:true, txt: смешать, смешать.}
       	var forWrite = "Название напитка - " + Name + "<br>" + "Алкогольный: " + ((getName.alc)?"Да":"Нет") + "<br>" + "Рецепт приготовления: " + getName.txt;
+      	}
+      	else{
+      	 forWrite = Name + "-данного напитка нет!"
+      	}
       	EL.innerHTML = forWrite;
       }
       function deleteDrink(){
-      	var Name = prompt ("Введите название напитка");// без валидации пока
+      	var Name = promptValid ("Введите название напитка","Корректно введите название напитка");
       	DrinkStorage.DeleteValue(Name);
 
       }
