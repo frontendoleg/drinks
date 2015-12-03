@@ -1,4 +1,4 @@
-function ThashStorage(Name){
+function THashStorage(){
   this.Name = {};
   this.Reset = function(){
   this.Name = {};
@@ -10,8 +10,11 @@ function ThashStorage(Name){
   return this.Name[Key];
   }
   this.DeleteValue = function(Key){
-  this.Name[key] = null;
+  this.Name[Key] = null;
   }
   this.GetKeys = function(){
+  this.KeysA = [];
+    for(var key in this.Name)
+      this.KeysA[this.KeysA.length] = key; // Работает, но выдает список значений, а не список ключей!!!
   }
 }

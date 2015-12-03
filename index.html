@@ -30,7 +30,7 @@
     <div class = 'wrapper'>
     <div class = 'info'>
       <h1>Рецепты напитков</h1>
-      <p></p>
+      <p id = 'place'></p> <!-- сюда вставляем информацию из объекта -->
 
     </div>
     <div class = "buttons">
@@ -40,18 +40,36 @@
     <input type = "button" value = "перечень всех напитков" class = 'btn' onclick="listDrink()">
     </div>
     </div>
+    <script src = 'HashStorage.js'></script>
     <script>
+      var DrinkStorage = new THashStorage(); // создаем объект DrinkStorage класса HashStorage
       function inputDrink(){
-      	alert('input');
+      	var Name = prompt ("Введите название напитка");// без валидации пока
+      	var Alchohol = confirm ("Напиток алкогольный?");
+      	var Recept = prompt ("Введите рецепт приготовления напитка");// без валидации пока
+      	DrinkStorage.AddValue(Name,{alc: Alchohol, txt: Recept}); // добавляем напиток в хранилище
       }
       function getDrink(){
-      	alert('get');
+      	var Name = prompt ("Введите название напитка");// без валидации пока
+      	var getName = DrinkStorage.GetValue(Name); // формат Object {alc:true, txt: смешать, смешать.}
+      	var EL = document.getElementById('place');
+      	var forWrite = "Название напитка - " + Name + "<br>" + "Алкогольный: " + ((getName.alc)?"Да":"Нет") + "<br>" + "Рецепт приготовления: " + getName.txt;
+      	EL.innerHTML = forWrite;
       }
       function deleteDrink(){
-      	alert('delete');
+      	var Name = prompt ("Введите название напитка");// без валидации пока
+      	DrinkStorage.DeleteValue(Name);
+
       }
       function listDrink(){
-      	alert('list');
+      	DrinkStorage.GetKeys();
+      	console.log (DrinkStorage);
+      	var EL = document.getElementById('place'), forWrite = '';
+      	console.log(DrinkStorage.KeysA.length);
+      	for (var i=0; i<DrinkStorage.KeysA.length; i++)
+      		{forWrite+=DrinkStorage.KeysA[i]+"<br>";
+      		console.log(forWrite);}
+      	EL.innerHTML = forWrite;
       }
     </script>
   </body>
