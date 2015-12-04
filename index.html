@@ -36,7 +36,7 @@
     <div class = 'wrapper'>
     <div class = 'info'>
       <h1>Рецепты напитков</h1>
-      <p id = 'place'></p> <!-- сюда вставляем информацию из объекта -->
+      <p id = 'place'></p> <!-- сюда вставляем информацию из хранилища -->
 
     </div>
     <div class = "buttons">
@@ -49,7 +49,7 @@
     <script src = 'HashStorage.js'></script>
     <script>
       var DrinkStorage = new THashStorage(); // создаем объект DrinkStorage класса HashStorage
-      function promptValid(msg1,msg2){
+      function promptValid(msg1,msg2){ // аналог prompt с проверкой валидации.
       	var msg, Name;
       	msg = msg1; // первое приглашение
       	do{
@@ -75,21 +75,26 @@
       	else{
       	 forWrite = Name + "-данного напитка нет!"
       	}
-      	EL.innerHTML = forWrite;
+      	EL.innerHTML = forWrite; // выводим сообщение
       }
       function deleteDrink(){
+      	var forWrite, EL = document.getElementById('place');
       	var Name = promptValid ("Введите название напитка","Корректно введите название напитка");
-      	DrinkStorage.DeleteValue(Name);
-
+      	if(Name in DrinkStorage.Name){
+      		DrinkStorage.DeleteValue(Name);
+      		forWrite = Name + " - напиток успешно удален"
+      	}
+      	else{
+      		forWrite = Name + " - данного напитка нет!"
+      	}
+      	EL.innerHTML = forWrite;
       }
       function listDrink(){
       	DrinkStorage.GetKeys();
-      	console.log (DrinkStorage);
       	var EL = document.getElementById('place'), forWrite = '';
-      	console.log(DrinkStorage.KeysA.length);
       	for (var i=0; i<DrinkStorage.KeysA.length; i++)
       		{forWrite+=DrinkStorage.KeysA[i]+"<br>";
-      		console.log(forWrite);}
+      	}
       	EL.innerHTML = forWrite;
       }
     </script>

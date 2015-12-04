@@ -13,8 +13,6 @@ function THashStorage(){
   delete this.Name[Key];
   }
   this.GetKeys = function(){
-  this.KeysA = [];
-    for(var key in this.Name)
-      this.KeysA[this.KeysA.length] = key; // Работает, но выдает список значений, а не список ключей!!!
-  }
+  this.KeysA = Object.keys(this.Name);
+}
 }
